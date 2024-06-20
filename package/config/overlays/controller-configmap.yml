@@ -1,0 +1,25 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:yaml", "yaml")
+
+#! 1. Decode/parse the contents of the `controller_manager_config.yaml` key within the ConfigMap.
+#! 2. Overlay the decoded/parsed YAML with the custom configuration.
+#! 3. Re-encode the overlayed result to a string.
+
+#@overlay/match by=overlay.subset({"kind":"ConfigMap", "metadata":{"name":"tempo-operator-manager-config"}})
+---
+data:
+  #@overlay/replace via=lambda left, _: yaml.decode(left)
+  controller_manager_config.yaml:
+
+#@overlay/match by=overlay.subset({"kind":"ConfigMap", "metadata":{"name":"tempo-operator-manager-config"}})
+---
+data:
+  #@overlay/match-child-defaults missing_ok=True
+  controller_manager_config.yaml: #@ data.values.configMapData
+
+#@overlay/match by=overlay.subset({"kind":"ConfigMap", "metadata":{"name":"tempo-operator-manager-config"}})
+---
+data:
+  #@overlay/replace via=lambda left, _: yaml.encode(left)
+  controller_manager_config.yaml:

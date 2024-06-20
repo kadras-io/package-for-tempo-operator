@@ -1,0 +1,21 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata":{"name":"tempo-operator-controller"}})
+---
+spec:
+  replicas: #@ data.values.controller.replicas
+  template:
+    spec:
+      containers:
+        #@overlay/match by="name"
+        - name: manager
+          env:
+            #@ if/end data.values.tempo.image.version:
+            #@overlay/match by="name"
+            - name: RELATED_IMAGE_TEMPO
+              value: #@ "docker.io/grafana/tempo:{}".format(data.values.tempo.image.version)
+            #@ if/end data.values.tempo.image.version:
+            #@overlay/match by="name"
+            - name: RELATED_IMAGE_TEMPO_QUERY
+              value: #@ "docker.io/grafana/tempo-query:{}".format(data.values.tempo.image.version)
