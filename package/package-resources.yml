@@ -1,0 +1,67 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: tempo-operator.packages.kadras.io.0.0.0
+spec:
+  licenses:
+  - Apache 2.0
+  refName: tempo-operator.packages.kadras.io
+  releaseNotes: https://github.com/kadras-io/package-for-tempo-operator/releases
+  releasedAt: null
+  template:
+    spec:
+      deploy:
+      - kapp: {}
+      fetch:
+      - git: {}
+      template:
+      - ytt:
+          paths:
+          - config
+      - kbld: {}
+  valuesSchema:
+    openAPIv3: {}
+  version: 0.0.0
+
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  creationTimestamp: null
+  name: tempo-operator.packages.kadras.io
+spec:
+  categories:
+  - gitops
+  displayName: tempo-operator
+  longDescription: Tempo is an open source, easy-to-use, and high-scale distributed
+    tracing backend. It can ingest common open source tracing protocols including
+    Jaeger, Zipkin, and OpenTelemetry and requires only object storage to operate.
+    The Community Tempo Operator supports Tempo deployments in Microservices mode
+    (TempoStack CR) and Monolithic mode (TempoMonolithic CR).
+  maintainers:
+  - name: Thomas Vitale
+  providerName: Kadras
+  shortDescription: Open source, easy-to-use, and high-scale distributed tracing backend
+    with support for OpenTelemetry.
+  supportDescription: Go to https://kadras.io for documentation and https://github.com/kadras-io/package-for-tempo-operator
+    for community support.
+
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  annotations:
+    kctrl.carvel.dev/local-fetch-0: .
+  creationTimestamp: null
+  name: tempo-operator
+spec:
+  packageRef:
+    refName: tempo-operator.packages.kadras.io
+    versionSelection:
+      constraints: 0.0.0
+  serviceAccountName: kadras-install-sa
+status:
+  conditions: null
+  friendlyDescription: ""
+  observedGeneration: 0

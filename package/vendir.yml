@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - githubRelease:
+      disableAutoChecksumValidation: true
+      slug: grafana/tempo-operator
+      tag: v0.11.1
+    includePaths:
+    - tempo-operator.yaml
+    path: .
+  path: config/upstream
+kind: Config
+minimumRequiredVersion: ""

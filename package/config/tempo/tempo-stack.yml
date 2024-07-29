@@ -1,0 +1,56 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@ if/end data.values.tempo.tempoStack.enabled:
+---
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack
+metadata:
+  name: default
+  #@ if/end data.values.tempo.namespace != "":
+  namespace: #@ data.values.tempo.namespace
+spec:
+  extraConfig:
+    tempo: #@ data.values.tempo.extraConfig
+  
+  observability:
+    grafana:
+      createDatasource: #@ data.values.tempo.observability.grafana.createDatasource
+    metrics:
+      createPrometheusRules: #@ data.values.tempo.observability.metrics.createPrometheusRules
+      createServiceMonitors: #@ data.values.tempo.observability.metrics.createServiceMonitors
+    tracing:
+      #@ if/end data.values.tempo.observability.tracing.jaegerEndpoint != "":
+      jaeger_agent_endpoint: #@ data.values.tempo.tracing.jaegerEndpoint
+      #@ if/end data.values.tempo.observability.tracing.samplingFraction != "":
+      sampling_fraction: #@ data.values.tempo.tracing.samplingFraction
+
+  replicationFactor: #@ data.values.tempo.tempoStack.replicationFactor
+
+  storage:
+    secret:
+      name: #@ data.values.tempo.storage.backend.secret.name
+      type: #@ data.values.tempo.storage.backend.type
+  
+  storageSize: #@ data.values.tempo.storage.size
+  
+  resources:
+    total:
+      limits:
+        cpu: #@ data.values.tempo.resources.limits.cpu
+        memory: #@ data.values.tempo.resources.limits.memory
+      requests:
+        cpu: #@ data.values.tempo.resources.requests.cpu
+        memory: #@ data.values.tempo.resources.requests.memory
+  
+  template:
+    gateway:
+      enabled: #@ data.values.tempo.tempoStack.gateway.enabled
+      ingress:
+        annotations: #@ data.values.tempo.tempoStack.gateway.ingress.annotations
+        host: #@ data.values.tempo.tempoStack.gateway.ingress.host
+        ingressClassName: #@ data.values.tempo.tempoStack.gateway.ingress.ingressClassName
+        type: #@ data.values.tempo.tempoStack.gateway.ingress.type
+    queryFrontend:
+      jaegerQuery:
+        enabled: #@ data.values.tempo.jaegerui.enabled

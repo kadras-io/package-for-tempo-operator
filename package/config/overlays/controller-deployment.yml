@@ -1,0 +1,7 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata":{"name":"tempo-operator-controller"}})
+---
+spec:
+  replicas: #@ data.values.controller.replicas

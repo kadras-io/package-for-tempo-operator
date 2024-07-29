@@ -1,0 +1,22 @@
+# Certificate
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tracegen
+  namespace: obs-stack
+spec:
+  template:
+    spec:
+      containers:
+        - name: tracegen
+          image: ghcr.io/open-telemetry/opentelemetry-collector-contrib/tracegen:latest
+          command:
+            - "./tracegen"
+          args:
+            - -otlp-endpoint=tempo-default-distributor:4317
+            - -otlp-insecure
+            - -duration=10s
+            - -workers=1
+      restartPolicy: Never
+  backoffLimit: 4

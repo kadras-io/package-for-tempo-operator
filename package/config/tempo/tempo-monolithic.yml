@@ -1,0 +1,52 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@ if/end data.values.tempo.tempoMonolithic.enabled:
+---
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoMonolithic
+metadata:
+  name: default
+  #@ if/end data.values.tempo.namespace != "":
+  namespace: #@ data.values.tempo.namespace
+spec:
+  extraConfig:
+    tempo: #@ data.values.tempo.extraConfig
+  
+  jaegerui:
+    enabled: #@ data.values.tempo.jaegerui.enabled 
+  
+  observability:
+    grafana:
+      dataSource:
+        enabled: #@ data.values.tempo.observability.grafana.createDatasource
+    metrics:
+      prometheusRules:
+        enabled: #@ data.values.tempo.observability.metrics.createPrometheusRules
+      serviceMonitors:
+        enabled: #@ data.values.tempo.observability.metrics.createServiceMonitors
+
+  storage:
+    traces:
+      backend: #@ data.values.tempo.storage.backend.type
+      #@ if data.values.tempo.storage.backend.type == "azure":
+      azure:
+        secret: #@ data.values.tempo.storage.backend.secret_name
+      #@ end
+      #@ if data.values.tempo.storage.backend.type == "gcs":
+      gcs:
+        secret: #@ data.values.tempo.storage.backend.secret_name
+      #@ end
+      #@ if data.values.tempo.storage.backend.type == "s3":
+      s3:
+        secret: #@ data.values.tempo.storage.backend.secret_name
+      #@ end
+      size: #@ data.values.tempo.storage.size
+
+  resources:
+    limits:
+      cpu: #@ data.values.tempo.resources.limits.cpu
+      memory: #@ data.values.tempo.resources.limits.memory
+    requests:
+      cpu: #@ data.values.tempo.resources.requests.cpu
+      memory: #@ data.values.tempo.resources.requests.memory

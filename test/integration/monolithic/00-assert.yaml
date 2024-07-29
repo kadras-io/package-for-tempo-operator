@@ -1,0 +1,66 @@
+# AKS Support
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: operator-lifecycle-manager
+    app.kubernetes.io/name: tempo-operator
+    app.kubernetes.io/part-of: tempo-operator
+  annotations:
+    admissions.enforcer/disabled: "true"
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: operator-lifecycle-manager
+    app.kubernetes.io/name: tempo-operator
+    app.kubernetes.io/part-of: tempo-operator
+  annotations:
+    admissions.enforcer/disabled: "true"
+
+# High Availability
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tempo-operator-controller
+  namespace: tempo-operator-system
+spec:
+  replicas: 1
+status:
+  readyReplicas: 1 
+
+# Image Pull Secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: canonical-registry-credentials
+  namespace: tempo-operator-system
+  annotations:
+    secretgen.carvel.dev/image-pull-secret: ""
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6e319
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: tempo-operator-system
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: canonical-registry-credentials
+
+# Tempo Monolithic
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tempo-default
+  namespace: obs-monolithic
+status:
+  availableReplicas: 1
