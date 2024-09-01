@@ -27,13 +27,13 @@ High availability for the Tempo Stack can be enabled by configuring at least 2 r
 tempo:
   tempoStack:
     compactor:
-      replicas: 1
+      replicas: 3
     distributor:
-      replicas: 1
+      replicas: 3
     ingester:
       replicas: 3
     querier:
-      replicas: 1
+      replicas: 3
     queryFrontend:
       replicas: 3
 ```

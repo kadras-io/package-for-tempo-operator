@@ -45,7 +45,8 @@ spec:
     compactor:
       replicas: #@ data.values.tempo.tempoStack.compactor.replicas
     distributor:
-      replicas: #@ data.values.tempo.tempoStack.distributor.replicas
+      component:
+        replicas: #@ data.values.tempo.tempoStack.distributor.replicas
     gateway:
       enabled: #@ data.values.tempo.tempoStack.gateway.enabled
       ingress:
@@ -58,6 +59,7 @@ spec:
     querier:
       replicas: #@ data.values.tempo.tempoStack.querier.replicas
     queryFrontend:
-      replicas: #@ data.values.tempo.tempoStack.queryFrontend.replicas
+      component:
+        replicas: #@ data.values.tempo.tempoStack.queryFrontend.replicas
       jaegerQuery:
         enabled: #@ data.values.tempo.jaegerui.enabled
