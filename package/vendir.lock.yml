@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - githubRelease:
-      tag: v0.11.1
-      url: https://api.github.com/repos/grafana/tempo-operator/releases/164412484
+      tag: v0.13.0
+      url: https://api.github.com/repos/grafana/tempo-operator/releases/172330026
     path: .
   path: config/upstream
 kind: LockConfig
