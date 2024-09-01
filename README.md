@@ -129,12 +129,16 @@ Settings for TempoStack.
 | Config | Default | Description |
 |-------|-------------------|-------------|
 | `tempo.tempoStack.enabled` | `false` | Whether to deploy the built-in TempoStack instance. |
-| `tempo.tempoStack.replicationFactor` | `1` | Number of replicas to deploy for each Tempo component. |
+| `tempo.tempoStack.compactor.replicas` | `0` | Number of replicas to deploy for the Compactor component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.distributor.replicas` | `0` | Number of replicas to deploy for the Distributor component. In order to enable high availability, it should be greater than 1. |
 | `tempo.tempoStack.gateway.enabled` | `false` | Whether to enable the Tempo Gateway. |
 | `tempo.tempoStack.gateway.ingress.annotations` | `{}` | The annotations for the Ingress object. |
 | `tempo.tempoStack.gateway.ingress.host` | `""` | The hostname of the Ingress object. |
 | `tempo.tempoStack.gateway.ingress.ingressClassName` | `contour` | The class of the Ingress Controller to use for the Tempo Gateway. |
 | `tempo.tempoStack.gateway.ingress.type` | `""` | Type of Ingress for the Tempo Gateway. Valid options: `ingress`, `route`. |
+| `tempo.tempoStack.ingester.replicas` | `0` | Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.querier.replicas` | `0` | Number of replicas to deploy for the Querier component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.queryFrontend.replicas` | `0` | Number of replicas to deploy for the Query Frontend component. In order to enable high availability, it should be greater than 1. |
 
 Settings for TempoMonolithic.
 

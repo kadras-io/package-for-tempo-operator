@@ -21,12 +21,21 @@ configMapData:
 
 ## High availability for Tempo Stack
 
-High availability for the Tempo Stack can be enabled by configuring at least 2 replicas. You can configure the number of replicas for each component in the stack or apply the same strategy across all components. This package supports the latter strategy out of the box.
+High availability for the Tempo Stack can be enabled by configuring at least 2 replicas for the desired Tempo components.
 
 ```yaml
 tempo:
   tempoStack:
-    replicationFactor: 2
+    compactor:
+      replicas: 1
+    distributor:
+      replicas: 1
+    ingester:
+      replicas: 3
+    querier:
+      replicas: 1
+    queryFrontend:
+      replicas: 3
 ```
 
 ## High availability for Tempo Monolithic

@@ -72,8 +72,15 @@ tempo:
     #@schema/desc "Whether to deploy the built-in TempoStack instance."
     enabled: false
 
-    #@schema/desc "Number of replicas to deploy for each Tempo component."
-    replicationFactor: 1
+    #@schema/desc "Settings for the Tempo Compactor."
+    compactor:
+      #@schema/desc "Number of replicas to deploy for the Compactor component. In order to enable high availability, it should be greater than 1."
+      replicas: 0
+
+    #@schema/desc "Settings for the Tempo Distributor."
+    distributor:
+      #@schema/desc "Number of replicas to deploy for the Distributor component. In order to enable high availability, it should be greater than 1."
+      replicas: 0
 
     #@schema/desc "Settings for the Tempo Gateway."
     gateway:
@@ -91,6 +98,21 @@ tempo:
         #@schema/validation one_of=["ingress", "route"]
         #@schema/nullable
         type: ""
+    
+    #@schema/desc "Settings for the Tempo Ingester."
+    ingester:
+      #@schema/desc "Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1."
+      replicas: 0
+    
+    #@schema/desc "Settings for the Tempo Querier."
+    querier:
+      #@schema/desc "Number of replicas to deploy for the Querier component. In order to enable high availability, it should be greater than 1."
+      replicas: 0
+    
+    #@schema/desc "Settings for the Tempo Query Frontend."
+    queryFrontend:
+      #@schema/desc "Number of replicas to deploy for the Query Frontend component. In order to enable high availability, it should be greater than 1."
+      replicas: 0
 
   #@schema/desc "Settings for the built-in TempoMonolithic instance."
   tempoMonolithic:

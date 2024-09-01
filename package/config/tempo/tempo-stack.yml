@@ -25,8 +25,6 @@ spec:
       #@ if/end data.values.tempo.observability.tracing.samplingFraction != "":
       sampling_fraction: #@ data.values.tempo.tracing.samplingFraction
 
-  replicationFactor: #@ data.values.tempo.tempoStack.replicationFactor
-
   storage:
     secret:
       name: #@ data.values.tempo.storage.backend.secret.name
@@ -44,6 +42,10 @@ spec:
         memory: #@ data.values.tempo.resources.requests.memory
   
   template:
+    compactor:
+      replicas: #@ data.values.tempo.tempoStack.compactor.replicas
+    distributor:
+      replicas: #@ data.values.tempo.tempoStack.distributor.replicas
     gateway:
       enabled: #@ data.values.tempo.tempoStack.gateway.enabled
       ingress:
@@ -51,6 +53,11 @@ spec:
         host: #@ data.values.tempo.tempoStack.gateway.ingress.host
         ingressClassName: #@ data.values.tempo.tempoStack.gateway.ingress.ingressClassName
         type: #@ data.values.tempo.tempoStack.gateway.ingress.type
+    ingester:
+      replicas: #@ data.values.tempo.tempoStack.ingester.replicas
+    querier:
+      replicas: #@ data.values.tempo.tempoStack.querier.replicas
     queryFrontend:
+      replicas: #@ data.values.tempo.tempoStack.queryFrontend.replicas
       jaegerQuery:
         enabled: #@ data.values.tempo.jaegerui.enabled
