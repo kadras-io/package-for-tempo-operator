@@ -14,6 +14,8 @@ searchRules:
   - valueMatcher:
       imageRepo: docker.io/grafana/tempo-query
   - valueMatcher:
+      imageRepo: docker.io/jaegertracing/jaeger-query
+  - valueMatcher:
       imageRepo: quay.io/observatorium/api
   - valueMatcher:
       imageRepo: quay.io/observatorium/opa-openshift

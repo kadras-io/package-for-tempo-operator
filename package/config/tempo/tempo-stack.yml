@@ -56,6 +56,8 @@ spec:
         type: #@ data.values.tempo.tempoStack.gateway.ingress.type
     ingester:
       replicas: #@ data.values.tempo.tempoStack.ingester.replicas
+      #@ if/end data.values.tempo.tempoStack.ingester.podSecurityContext != {}:
+      podSecurityContext: #@ data.values.tempo.tempoStack.ingester.podSecurityContext
     querier:
       replicas: #@ data.values.tempo.tempoStack.querier.replicas
     queryFrontend:

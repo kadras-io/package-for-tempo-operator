@@ -137,6 +137,7 @@ Settings for TempoStack.
 | `tempo.tempoStack.gateway.ingress.ingressClassName` | `contour` | The class of the Ingress Controller to use for the Tempo Gateway. |
 | `tempo.tempoStack.gateway.ingress.type` | `""` | Type of Ingress for the Tempo Gateway. Valid options: `ingress`, `route`. |
 | `tempo.tempoStack.ingester.replicas` | `0` | Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.ingester.podSecurityContext` | `{}` | PodSecurityContext for the Ingester component. |
 | `tempo.tempoStack.querier.replicas` | `0` | Number of replicas to deploy for the Querier component. In order to enable high availability, it should be greater than 1. |
 | `tempo.tempoStack.queryFrontend.replicas` | `0` | Number of replicas to deploy for the Query Frontend component. In order to enable high availability, it should be greater than 1. |
 

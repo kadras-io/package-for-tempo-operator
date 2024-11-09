@@ -103,6 +103,8 @@ tempo:
     ingester:
       #@schema/desc "Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1."
       replicas: 1
+      #@schema/desc "PodSecurityContext for the Ingester component."
+      podSecurityContext: {}
     
     #@schema/desc "Settings for the Tempo Querier."
     querier:
