@@ -113,7 +113,7 @@ Settings for Tempo.
 | `tempo.observability.grafana.createDatasource` | `false` | Whether a Datasource managed by Grafana Operator should be created for Tempo. |
 | `tempo.observability.metrics.createPrometheusRules` | `false` | Whether PrometheusRules for alerts managed by Prometheus Operator should be created for Tempo. |
 | `tempo.observability.metrics.createServiceMonitors` | `false` | Whether ServiceMonitors managed by Prometheus Operator should be created for Tempo. |
-| `tempo.observability.tracing.jaegerEndpoint` | `""` | The Jaeger endpoint where to send traces. Only for TempoStack. |
+| `tempo.observability.tracing.otlpHttpEndpoint` | `""` | The OTLP HTTP endpoint where to send traces. Only for TempoStack. |
 | `tempo.observability.tracing.samplingFraction` | `""` | Sampling frequence for Tempo traces. Only for TempoStack. |
 | `tempo.storage.backend.type` | `memory` | Type of object storage that should be used. Valid options: `azure`, `gcs`, `s3`, `memory` (only for TempoMonolithic). |
 | `tempo.storage.backend.secret.name` | `""` | Name of the Secret containing the credentials to access the configured object storage. |

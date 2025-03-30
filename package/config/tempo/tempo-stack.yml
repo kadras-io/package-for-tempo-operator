@@ -20,8 +20,8 @@ spec:
       createPrometheusRules: #@ data.values.tempo.observability.metrics.createPrometheusRules
       createServiceMonitors: #@ data.values.tempo.observability.metrics.createServiceMonitors
     tracing:
-      #@ if/end data.values.tempo.observability.tracing.jaegerEndpoint != "":
-      jaeger_agent_endpoint: #@ data.values.tempo.tracing.jaegerEndpoint
+      #@ if/end data.values.tempo.observability.tracing.otlpHttpEndpoint != "":
+      otlp_http_endpoint: #@ data.values.tempo.tracing.otlpHttpEndpoint
       #@ if/end data.values.tempo.observability.tracing.samplingFraction != "":
       sampling_fraction: #@ data.values.tempo.tracing.samplingFraction
 

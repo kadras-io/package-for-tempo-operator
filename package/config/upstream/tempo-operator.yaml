@@ -12,7 +12,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.15.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   labels:
     app.kubernetes.io/managed-by: operator-lifecycle-manager
     app.kubernetes.io/name: tempo-operator
@@ -975,7 +975,6 @@ spec:
                             description: |-
                               TLS defines the TLS configuration for OTLP/gRPC ingestion.
 
-
                               On OpenShift when operator config `servingCertsService`  and TLS is enabled  but no `certName` and `caName`
                               are provided it will use OpenShift serving certificate service.
                             properties:
@@ -1012,7 +1011,6 @@ spec:
                           tls:
                             description: |-
                               TLS defines the TLS configuration for OTLP/HTTP ingestion.
-
 
                               On OpenShift when operator config `servingCertsService`  and TLS is enabled  but no `certName` and `caName`
                               are provided it will use OpenShift serving certificate service.
@@ -1061,10 +1059,8 @@ spec:
                               Claims lists the names of resources, defined in spec.resourceClaims,
                               that are used by this container.
 
-
                               This is an alpha field and requires enabling the
                               DynamicResourceAllocation feature gate.
-
 
                               This field is immutable. It can only be set for containers.
                             items:
@@ -1163,10 +1159,8 @@ spec:
                           Claims lists the names of resources, defined in spec.resourceClaims,
                           that are used by this container.
 
-
                           This is an alpha field and requires enabling the
                           DynamicResourceAllocation feature gate.
-
 
                           This field is immutable. It can only be set for containers.
                         items:
@@ -1401,10 +1395,8 @@ spec:
                           Claims lists the names of resources, defined in spec.resourceClaims,
                           that are used by this container.
 
-
                           This is an alpha field and requires enabling the
                           DynamicResourceAllocation feature gate.
-
 
                           This field is immutable. It can only be set for containers.
                         items:
@@ -1548,6 +1540,19 @@ spec:
                         type: object
                     type: object
                 type: object
+              query:
+                description: Query defines query configuration.
+                properties:
+                  rbac:
+                    description: |-
+                      RBAC defines query RBAC options.
+                      This option can be used only with multi-tenancy.
+                    properties:
+                      enabled:
+                        description: Enabled defines if the query RBAC should be enabled.
+                        type: boolean
+                    type: object
+                type: object
               resources:
                 description: Resources defines the compute resource requirements of
                   the Tempo container.
@@ -1557,10 +1562,8 @@ spec:
                       Claims lists the names of resources, defined in spec.resourceClaims,
                       that are used by this container.
 
-
                       This is an alpha field and requires enabling the
                       DynamicResourceAllocation feature gate.
-
 
                       This field is immutable. It can only be set for containers.
                     items:
@@ -1768,16 +1771,8 @@ spec:
               conditions:
                 description: Conditions of the Tempo deployment health.
                 items:
-                  description: "Condition contains details for one aspect of the current
-                    state of this API Resource.\n---\nThis struct is intended for
-                    direct use as an array at the field path .status.conditions.  For
-                    example,\n\n\n\ttype FooStatus struct{\n\t    // Represents the
-                    observations of a foo's current state.\n\t    // Known .status.conditions.type
-                    are: \"Available\", \"Progressing\", and \"Degraded\"\n\t    //
-                    +patchMergeKey=type\n\t    // +patchStrategy=merge\n\t    // +listType=map\n\t
-                    \   // +listMapKey=type\n\t    Conditions []metav1.Condition `json:\"conditions,omitempty\"
-                    patchStrategy:\"merge\" patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`\n\n\n\t
-                    \   // other fields\n\t}"
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
                   properties:
                     lastTransitionTime:
                       description: |-
@@ -1818,12 +1813,7 @@ spec:
                       - Unknown
                       type: string
                     type:
-                      description: |-
-                        type of condition in CamelCase or in foo.example.com/CamelCase.
-                        ---
-                        Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
-                        useful (see .node.status.conditions), the ability to deconflict is important.
-                        The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
                       maxLength: 316
                       pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
                       type: string
@@ -1852,7 +1842,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.15.0
+    controller-gen.kubebuilder.io/version: v0.16.5
   labels:
     app.kubernetes.io/managed-by: operator-lifecycle-manager
     app.kubernetes.io/name: tempo-operator
@@ -2142,12 +2132,22 @@ spec:
                     properties:
                       jaeger_agent_endpoint:
                         default: localhost:6831
-                        description: JaegerAgentEndpoint defines the jaeger endpoint
-                          data gets send to.
+                        description: |-
+                          JaegerAgentEndpoint defines the jaeger endpoint data gets send to.
+                          Deprecated: in favor of OTLPHttpEndpoint.
+                        type: string
+                      otlp_http_endpoint:
+                        default: http://localhost:4320
+                        description: |-
+                          OTLPHttpEndpoint defines the OTLP/http endpoint data gets send to.
+                          For example, "http://localhost:4320".
+                          The default OTLP/http port 4318 collides with the distributor ports, therefore it is recommended to use a different port
+                          on the sidecar injected to the Tempo (e.g. 4320).
                         type: string
                       sampling_fraction:
-                        description: SamplingFraction defines the sampling ratio.
-                          Valid values are 0 to 1.
+                        description: |-
+                          SamplingFraction defines the sampling ratio. Valid values are 0 to 1.
+                          The SamplingFraction has to be defined to enable tracing.
                         type: string
                     type: object
                 type: object
@@ -2171,10 +2171,8 @@ spec:
                           Claims lists the names of resources, defined in spec.resourceClaims,
                           that are used by this container.
 
-
                           This is an alpha field and requires enabling the
                           DynamicResourceAllocation feature gate.
-
 
                           This field is immutable. It can only be set for containers.
                         items:
@@ -2356,11 +2354,9 @@ spec:
                               Some volume types allow the Kubelet to change the ownership of that volume
                               to be owned by the pod:
 
-
                               1. The owning GID will be the FSGroup
                               2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                               3. The permission bits are OR'd with rw-rw----
-
 
                               If unset, the Kubelet will not modify the ownership and permissions of any volume.
                               Note that this field cannot be set when spec.os.name is windows.
@@ -2447,7 +2443,6 @@ spec:
                                 description: |-
                                   type indicates which kind of seccomp profile will be applied.
                                   Valid options are:
-
 
                                   Localhost - a profile defined in a file on the node should be used.
                                   RuntimeDefault - the container runtime default profile should be used.
@@ -2537,10 +2532,8 @@ spec:
                               Claims lists the names of resources, defined in spec.resourceClaims,
                               that are used by this container.
 
-
                               This is an alpha field and requires enabling the
                               DynamicResourceAllocation feature gate.
-
 
                               This field is immutable. It can only be set for containers.
                             items:
@@ -2632,7 +2625,6 @@ spec:
                         description: |-
                           TempoComponentSpec is embedded to extend this definition with further options.
 
-
                           Currently, there is no way to inline this field.
                           See: https://github.com/golang/go/issues/6213
                         properties:
@@ -2652,11 +2644,9 @@ spec:
                                   Some volume types allow the Kubelet to change the ownership of that volume
                                   to be owned by the pod:
 
-
                                   1. The owning GID will be the FSGroup
                                   2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                                   3. The permission bits are OR'd with rw-rw----
-
 
                                   If unset, the Kubelet will not modify the ownership and permissions of any volume.
                                   Note that this field cannot be set when spec.os.name is windows.
@@ -2743,7 +2733,6 @@ spec:
                                     description: |-
                                       type indicates which kind of seccomp profile will be applied.
                                       Valid options are:
-
 
                                       Localhost - a profile defined in a file on the node should be used.
                                       RuntimeDefault - the container runtime default profile should be used.
@@ -2833,10 +2822,8 @@ spec:
                                   Claims lists the names of resources, defined in spec.resourceClaims,
                                   that are used by this container.
 
-
                                   This is an alpha field and requires enabling the
                                   DynamicResourceAllocation feature gate.
-
 
                                   This field is immutable. It can only be set for containers.
                                 items:
@@ -2927,7 +2914,6 @@ spec:
                         description: |-
                           TLS defines TLS configuration for distributor receivers
 
-
                           If openshift feature flag `servingCertsService` is enabled and TLS is enabled but no
                           certName or caName is specified, OpenShift service serving certificates will  be used.
                         properties:
@@ -2957,7 +2943,6 @@ spec:
                         description: |-
                           TempoComponentSpec is embedded to extend this definition with further options.
 
-
                           Currently there is no way to inline this field.
                           See: https://github.com/golang/go/issues/6213
                         properties:
@@ -2977,11 +2962,9 @@ spec:
                                   Some volume types allow the Kubelet to change the ownership of that volume
                                   to be owned by the pod:
 
-
                                   1. The owning GID will be the FSGroup
                                   2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                                   3. The permission bits are OR'd with rw-rw----
-
 
                                   If unset, the Kubelet will not modify the ownership and permissions of any volume.
                                   Note that this field cannot be set when spec.os.name is windows.
@@ -3068,7 +3051,6 @@ spec:
                                     description: |-
                                       type indicates which kind of seccomp profile will be applied.
                                       Valid options are:
-
 
                                       Localhost - a profile defined in a file on the node should be used.
                                       RuntimeDefault - the container runtime default profile should be used.
@@ -3158,10 +3140,8 @@ spec:
                                   Claims lists the names of resources, defined in spec.resourceClaims,
                                   that are used by this container.
 
-
                                   This is an alpha field and requires enabling the
                                   DynamicResourceAllocation feature gate.
-
 
                                   This field is immutable. It can only be set for containers.
                                 items:
@@ -3293,6 +3273,14 @@ spec:
                             - ""
                             type: string
                         type: object
+                      rbac:
+                        description: RBAC defines query RBAC options.
+                        properties:
+                          enabled:
+                            description: Enabled defines if the query RBAC should
+                              be enabled.
+                            type: boolean
+                        type: object
                     required:
                     - enabled
                     type: object
@@ -3315,11 +3303,9 @@ spec:
                               Some volume types allow the Kubelet to change the ownership of that volume
                               to be owned by the pod:
 
-
                               1. The owning GID will be the FSGroup
                               2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                               3. The permission bits are OR'd with rw-rw----
-
 
                               If unset, the Kubelet will not modify the ownership and permissions of any volume.
                               Note that this field cannot be set when spec.os.name is windows.
@@ -3406,7 +3392,6 @@ spec:
                                 description: |-
                                   type indicates which kind of seccomp profile will be applied.
                                   Valid options are:
-
 
                                   Localhost - a profile defined in a file on the node should be used.
                                   RuntimeDefault - the container runtime default profile should be used.
@@ -3496,10 +3481,8 @@ spec:
                               Claims lists the names of resources, defined in spec.resourceClaims,
                               that are used by this container.
 
-
                               This is an alpha field and requires enabling the
                               DynamicResourceAllocation feature gate.
-
 
                               This field is immutable. It can only be set for containers.
                             items:
@@ -3603,11 +3586,9 @@ spec:
                               Some volume types allow the Kubelet to change the ownership of that volume
                               to be owned by the pod:
 
-
                               1. The owning GID will be the FSGroup
                               2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                               3. The permission bits are OR'd with rw-rw----
-
 
                               If unset, the Kubelet will not modify the ownership and permissions of any volume.
                               Note that this field cannot be set when spec.os.name is windows.
@@ -3694,7 +3675,6 @@ spec:
                                 description: |-
                                   type indicates which kind of seccomp profile will be applied.
                                   Valid options are:
-
 
                                   Localhost - a profile defined in a file on the node should be used.
                                   RuntimeDefault - the container runtime default profile should be used.
@@ -3784,10 +3764,8 @@ spec:
                               Claims lists the names of resources, defined in spec.resourceClaims,
                               that are used by this container.
 
-
                               This is an alpha field and requires enabling the
                               DynamicResourceAllocation feature gate.
-
 
                               This field is immutable. It can only be set for containers.
                             items:
@@ -3880,7 +3858,6 @@ spec:
                         description: |-
                           TempoComponentSpec is embedded to extend this definition with further options.
 
-
                           Currently there is no way to inline this field.
                           See: https://github.com/golang/go/issues/6213
                         properties:
@@ -3900,11 +3877,9 @@ spec:
                                   Some volume types allow the Kubelet to change the ownership of that volume
                                   to be owned by the pod:
 
-
                                   1. The owning GID will be the FSGroup
                                   2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
                                   3. The permission bits are OR'd with rw-rw----
-
 
                                   If unset, the Kubelet will not modify the ownership and permissions of any volume.
                                   Note that this field cannot be set when spec.os.name is windows.
@@ -3991,7 +3966,6 @@ spec:
                                     description: |-
                                       type indicates which kind of seccomp profile will be applied.
                                       Valid options are:
-
 
                                       Localhost - a profile defined in a file on the node should be used.
                                       RuntimeDefault - the container runtime default profile should be used.
@@ -4081,10 +4055,8 @@ spec:
                                   Claims lists the names of resources, defined in spec.resourceClaims,
                                   that are used by this container.
 
-
                                   This is an alpha field and requires enabling the
                                   DynamicResourceAllocation feature gate.
-
 
                                   This field is immutable. It can only be set for containers.
                                 items:
@@ -4193,10 +4165,8 @@ spec:
                                       Claims lists the names of resources, defined in spec.resourceClaims,
                                       that are used by this container.
 
-
                                       This is an alpha field and requires enabling the
                                       DynamicResourceAllocation feature gate.
-
 
                                       This field is immutable. It can only be set for containers.
                                     items:
@@ -4320,10 +4290,9 @@ spec:
                                   For instance on OpenShift this is set to https://thanos-querier.openshift-monitoring.svc.cluster.local:9091
                                 type: string
                               redMetricsNamespace:
-                                default: traces.span.metrics
-                                description: |-
-                                  REDMetricsNamespace defines the a prefix used retrieve span rate, error, and duration (RED) metrics.
-                                  By default it is set to `traces.span.metrics` following the default namespace of the OpenTelemetry Collector since Version 0.109.0.
+                                description: REDMetricsNamespace defines the a prefix
+                                  used retrieve span rate, error, and duration (RED)
+                                  metrics.
                                 type: string
                             type: object
                           resources:
@@ -4336,10 +4305,8 @@ spec:
                                   Claims lists the names of resources, defined in spec.resourceClaims,
                                   that are used by this container.
 
-
                                   This is an alpha field and requires enabling the
                                   DynamicResourceAllocation feature gate.
-
 
                                   This field is immutable. It can only be set for containers.
                                 items:
@@ -4402,10 +4369,8 @@ spec:
                                       Claims lists the names of resources, defined in spec.resourceClaims,
                                       that are used by this container.
 
-
                                       This is an alpha field and requires enabling the
                                       DynamicResourceAllocation feature gate.
-
 
                                       This field is immutable. It can only be set for containers.
                                     items:
@@ -4600,6 +4565,7 @@ spec:
                   Defaults to 30 seconds.
                 type: string
             required:
+            - managementState
             - storage
             type: object
           status:
@@ -4662,16 +4628,8 @@ spec:
               conditions:
                 description: Conditions of the Tempo deployment health.
                 items:
-                  description: "Condition contains details for one aspect of the current
-                    state of this API Resource.\n---\nThis struct is intended for
-                    direct use as an array at the field path .status.conditions.  For
-                    example,\n\n\n\ttype FooStatus struct{\n\t    // Represents the
-                    observations of a foo's current state.\n\t    // Known .status.conditions.type
-                    are: \"Available\", \"Progressing\", and \"Degraded\"\n\t    //
-                    +patchMergeKey=type\n\t    // +patchStrategy=merge\n\t    // +listType=map\n\t
-                    \   // +listMapKey=type\n\t    Conditions []metav1.Condition `json:\"conditions,omitempty\"
-                    patchStrategy:\"merge\" patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`\n\n\n\t
-                    \   // other fields\n\t}"
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
                   properties:
                     lastTransitionTime:
                       description: |-
@@ -4712,12 +4670,7 @@ spec:
                       - Unknown
                       type: string
                     type:
-                      description: |-
-                        type of condition in CamelCase or in foo.example.com/CamelCase.
-                        ---
-                        Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
-                        useful (see .node.status.conditions), the ability to deconflict is important.
-                        The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
                       maxLength: 316
                       pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
                       type: string
@@ -4830,6 +4783,21 @@ rules:
   - create
   - patch
 - apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - list
+  - watch
+- apiGroups:
   - apps
   resources:
   - deployments
@@ -4863,13 +4831,6 @@ rules:
   - dnses
   verbs:
   - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - persistentvolumeclaims
-  verbs:
   - list
   - watch
 - apiGroups:
@@ -4946,31 +4907,6 @@ rules:
   - tempo.grafana.com
   resources:
   - tempomonolithics
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - tempo.grafana.com
-  resources:
-  - tempomonolithics/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - tempo.grafana.com
-  resources:
-  - tempomonolithics/status
-  verbs:
-  - get
-  - patch
-  - update
-- apiGroups:
-  - tempo.grafana.com
-  resources:
   - tempostacks
   verbs:
   - create
@@ -4983,17 +4919,41 @@ rules:
 - apiGroups:
   - tempo.grafana.com
   resources:
+  - tempomonolithics/finalizers
   - tempostacks/finalizers
   verbs:
   - update
 - apiGroups:
   - tempo.grafana.com
   resources:
+  - tempomonolithics/status
   - tempostacks/status
   verbs:
   - get
   - patch
   - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: operator-lifecycle-manager
+    app.kubernetes.io/name: tempo-operator
+    app.kubernetes.io/part-of: tempo-operator
+  name: tempo-operator-metrics-auth-role
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -5008,28 +4968,6 @@ rules:
   - /metrics
   verbs:
   - get
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  labels:
-    app.kubernetes.io/managed-by: operator-lifecycle-manager
-    app.kubernetes.io/name: tempo-operator
-    app.kubernetes.io/part-of: tempo-operator
-  name: tempo-operator-proxy-role
-rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -5073,11 +5011,11 @@ metadata:
     app.kubernetes.io/managed-by: operator-lifecycle-manager
     app.kubernetes.io/name: tempo-operator
     app.kubernetes.io/part-of: tempo-operator
-  name: tempo-operator-proxy-rolebinding
+  name: tempo-operator-metrics-auth-rolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: tempo-operator-proxy-role
+  name: tempo-operator-metrics-auth-role
 subjects:
 - kind: ServiceAccount
   name: tempo-operator-controller-manager
@@ -5092,7 +5030,8 @@ data:
     health:
       healthProbeBindAddress: :8081
     metrics:
-      bindAddress: 127.0.0.1:8080
+      secure: true
+      bindAddress: ":8443"
     webhook:
       port: 9443
     leaderElection:
@@ -5219,18 +5158,18 @@ spec:
         - --config=controller_manager_config.yaml
         env:
         - name: RELATED_IMAGE_TEMPO
-          value: docker.io/grafana/tempo:2.6.1
+          value: docker.io/grafana/tempo:2.7.1
         - name: RELATED_IMAGE_JAEGER_QUERY
-          value: docker.io/jaegertracing/jaeger-query:1.62.0
+          value: docker.io/jaegertracing/jaeger-query:1.66.0
         - name: RELATED_IMAGE_TEMPO_QUERY
-          value: docker.io/grafana/tempo-query:2.6.1
+          value: docker.io/grafana/tempo-query:2.7.1
         - name: RELATED_IMAGE_TEMPO_GATEWAY
-          value: quay.io/observatorium/api:main-2024-11-05-28e4c83
+          value: quay.io/observatorium/api:main-2025-02-12-0636771
         - name: RELATED_IMAGE_TEMPO_GATEWAY_OPA
-          value: quay.io/observatorium/opa-openshift:main-2024-10-09-7237863
+          value: quay.io/observatorium/opa-openshift:main-2025-01-22-ed30f3c
         - name: RELATED_IMAGE_OAUTH_PROXY
           value: quay.io/openshift/origin-oauth-proxy:4.14
-        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.14.1
+        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.15.3
         livenessProbe:
           httpGet:
             path: /healthz
@@ -5241,6 +5180,9 @@ spec:
         ports:
         - containerPort: 9443
           name: webhook-server
+          protocol: TCP
+        - containerPort: 8443
+          name: https
           protocol: TCP
         readinessProbe:
           httpGet:
@@ -5264,29 +5206,6 @@ spec:
         - mountPath: /controller_manager_config.yaml
           name: manager-config
           subPath: controller_manager_config.yaml
-      - args:
-        - --secure-listen-address=0.0.0.0:8443
-        - --upstream=http://127.0.0.1:8080/
-        - --logtostderr=true
-        - --v=0
-        image: gcr.io/kubebuilder/kube-rbac-proxy:v0.13.1
-        name: kube-rbac-proxy
-        ports:
-        - containerPort: 8443
-          name: https
-          protocol: TCP
-        resources:
-          limits:
-            cpu: 500m
-            memory: 128Mi
-          requests:
-            cpu: 5m
-            memory: 64Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
       securityContext:
         runAsNonRoot: true
       serviceAccountName: tempo-operator-controller-manager

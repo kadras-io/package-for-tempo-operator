@@ -37,8 +37,8 @@ tempo:
       #@schema/desc "Whether ServiceMonitors managed by Prometheus Operator should be created for Tempo."
       createServiceMonitors: false
     tracing:
-      #@schema/desc "The Jaeger endpoint where to send traces. Only for TempoStack."
-      jaegerEndpoint: ""
+      #@schema/desc "The OTLP HTTP endpoint where to send traces. Only for TempoStack."
+      otlpHttpEndpoint: ""
       #@schema/desc "Sampling frequence for Tempo traces. Only for TempoStack."
       samplingFraction: ""
   
