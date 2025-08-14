@@ -114,11 +114,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchFields:
                                   description: A list of node selector requirements
                                     by node's fields.
@@ -146,11 +148,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                               type: object
                               x-kubernetes-map-type: atomic
                             weight:
@@ -163,6 +167,7 @@ spec:
                           - weight
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                       requiredDuringSchedulingIgnoredDuringExecution:
                         description: |-
                           If the affinity requirements specified by this field are not met at
@@ -207,11 +212,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchFields:
                                   description: A list of node selector requirements
                                     by node's fields.
@@ -239,14 +246,17 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                               type: object
                               x-kubernetes-map-type: atomic
                             type: array
+                            x-kubernetes-list-type: atomic
                         required:
                         - nodeSelectorTerms
                         type: object
@@ -307,11 +317,13 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: atomic
                                         required:
                                         - key
                                         - operator
                                         type: object
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                     matchLabels:
                                       additionalProperties:
                                         type: string
@@ -326,13 +338,13 @@ spec:
                                   description: |-
                                     MatchLabelKeys is a set of pod label keys to select which pods will
                                     be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+                                    incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
                                     to select the group of existing pods which pods will be taken into consideration
                                     for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                     pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                    Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+                                    Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                    This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                                   items:
                                     type: string
                                   type: array
@@ -341,13 +353,13 @@ spec:
                                   description: |-
                                     MismatchLabelKeys is a set of pod label keys to select which pods will
                                     be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+                                    incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
                                     to select the group of existing pods which pods will be taken into consideration
                                     for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                     pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+                                    Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                    This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                                   items:
                                     type: string
                                   type: array
@@ -387,11 +399,13 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: atomic
                                         required:
                                         - key
                                         - operator
                                         type: object
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                     matchLabels:
                                       additionalProperties:
                                         type: string
@@ -411,6 +425,7 @@ spec:
                                   items:
                                     type: string
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 topologyKey:
                                   description: |-
                                     This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
@@ -433,6 +448,7 @@ spec:
                           - weight
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                       requiredDuringSchedulingIgnoredDuringExecution:
                         description: |-
                           If the affinity requirements specified by this field are not met at
@@ -482,11 +498,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchLabels:
                                   additionalProperties:
                                     type: string
@@ -501,13 +519,13 @@ spec:
                               description: |-
                                 MatchLabelKeys is a set of pod label keys to select which pods will
                                 be taken into consideration. The keys are used to lookup values from the
-                                incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+                                incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
                                 to select the group of existing pods which pods will be taken into consideration
                                 for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                 pod labels will be ignored. The default value is empty.
-                                The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+                                Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                               items:
                                 type: string
                               type: array
@@ -516,13 +534,13 @@ spec:
                               description: |-
                                 MismatchLabelKeys is a set of pod label keys to select which pods will
                                 be taken into consideration. The keys are used to lookup values from the
-                                incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+                                incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
                                 to select the group of existing pods which pods will be taken into consideration
                                 for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                 pod labels will be ignored. The default value is empty.
-                                The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+                                Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                               items:
                                 type: string
                               type: array
@@ -561,11 +579,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchLabels:
                                   additionalProperties:
                                     type: string
@@ -585,6 +605,7 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: atomic
                             topologyKey:
                               description: |-
                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
@@ -597,6 +618,7 @@ spec:
                           - topologyKey
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                     type: object
                   podAntiAffinity:
                     description: Describes pod anti-affinity scheduling rules (e.g.
@@ -654,11 +676,13 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: atomic
                                         required:
                                         - key
                                         - operator
                                         type: object
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                     matchLabels:
                                       additionalProperties:
                                         type: string
@@ -673,13 +697,13 @@ spec:
                                   description: |-
                                     MatchLabelKeys is a set of pod label keys to select which pods will
                                     be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+                                    incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
                                     to select the group of existing pods which pods will be taken into consideration
                                     for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                     pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                    Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+                                    Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                    This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                                   items:
                                     type: string
                                   type: array
@@ -688,13 +712,13 @@ spec:
                                   description: |-
                                     MismatchLabelKeys is a set of pod label keys to select which pods will
                                     be taken into consideration. The keys are used to lookup values from the
-                                    incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+                                    incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
                                     to select the group of existing pods which pods will be taken into consideration
                                     for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                     pod labels will be ignored. The default value is empty.
-                                    The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                    Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                    This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                    The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+                                    Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                    This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                                   items:
                                     type: string
                                   type: array
@@ -734,11 +758,13 @@ spec:
                                             items:
                                               type: string
                                             type: array
+                                            x-kubernetes-list-type: atomic
                                         required:
                                         - key
                                         - operator
                                         type: object
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                     matchLabels:
                                       additionalProperties:
                                         type: string
@@ -758,6 +784,7 @@ spec:
                                   items:
                                     type: string
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 topologyKey:
                                   description: |-
                                     This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
@@ -780,6 +807,7 @@ spec:
                           - weight
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                       requiredDuringSchedulingIgnoredDuringExecution:
                         description: |-
                           If the anti-affinity requirements specified by this field are not met at
@@ -829,11 +857,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchLabels:
                                   additionalProperties:
                                     type: string
@@ -848,13 +878,13 @@ spec:
                               description: |-
                                 MatchLabelKeys is a set of pod label keys to select which pods will
                                 be taken into consideration. The keys are used to lookup values from the
-                                incoming pod labels, those key-value labels are merged with `LabelSelector` as `key in (value)`
+                                incoming pod labels, those key-value labels are merged with `labelSelector` as `key in (value)`
                                 to select the group of existing pods which pods will be taken into consideration
                                 for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                 pod labels will be ignored. The default value is empty.
-                                The same key is forbidden to exist in both MatchLabelKeys and LabelSelector.
-                                Also, MatchLabelKeys cannot be set when LabelSelector isn't set.
-                                This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                The same key is forbidden to exist in both matchLabelKeys and labelSelector.
+                                Also, matchLabelKeys cannot be set when labelSelector isn't set.
+                                This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                               items:
                                 type: string
                               type: array
@@ -863,13 +893,13 @@ spec:
                               description: |-
                                 MismatchLabelKeys is a set of pod label keys to select which pods will
                                 be taken into consideration. The keys are used to lookup values from the
-                                incoming pod labels, those key-value labels are merged with `LabelSelector` as `key notin (value)`
+                                incoming pod labels, those key-value labels are merged with `labelSelector` as `key notin (value)`
                                 to select the group of existing pods which pods will be taken into consideration
                                 for the incoming pod's pod (anti) affinity. Keys that don't exist in the incoming
                                 pod labels will be ignored. The default value is empty.
-                                The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector.
-                                Also, MismatchLabelKeys cannot be set when LabelSelector isn't set.
-                                This is an alpha field and requires enabling MatchLabelKeysInPodAffinity feature gate.
+                                The same key is forbidden to exist in both mismatchLabelKeys and labelSelector.
+                                Also, mismatchLabelKeys cannot be set when labelSelector isn't set.
+                                This is a beta field and requires enabling MatchLabelKeysInPodAffinity feature gate (enabled by default).
                               items:
                                 type: string
                               type: array
@@ -908,11 +938,13 @@ spec:
                                         items:
                                           type: string
                                         type: array
+                                        x-kubernetes-list-type: atomic
                                     required:
                                     - key
                                     - operator
                                     type: object
                                   type: array
+                                  x-kubernetes-list-type: atomic
                                 matchLabels:
                                   additionalProperties:
                                     type: string
@@ -932,6 +964,7 @@ spec:
                               items:
                                 type: string
                               type: array
+                              x-kubernetes-list-type: atomic
                             topologyKey:
                               description: |-
                                 This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching
@@ -944,6 +977,7 @@ spec:
                           - topologyKey
                           type: object
                         type: array
+                        x-kubernetes-list-type: atomic
                     type: object
                 type: object
               extraConfig:
@@ -1072,6 +1106,12 @@ spec:
                                     the Pod where this field is used. It makes that resource available
                                     inside a container.
                                   type: string
+                                request:
+                                  description: |-
+                                    Request is the name chosen for a request in the referenced claim.
+                                    If empty, everything from the claim is made available, otherwise
+                                    only the result of this request.
+                                  type: string
                               required:
                               - name
                               type: object
@@ -1172,6 +1212,12 @@ spec:
                                 the Pod where this field is used. It makes that resource available
                                 inside a container.
                               type: string
+                            request:
+                              description: |-
+                                Request is the name chosen for a request in the referenced claim.
+                                If empty, everything from the claim is made available, otherwise
+                                only the result of this request.
+                              type: string
                           required:
                           - name
                           type: object
@@ -1236,6 +1282,66 @@ spec:
                     description: ServicesQueryDuration defines how long the services
                       will be available in the services list
                     type: string
+                  tempoQueryResources:
+                    description: Resources defines the compute resource requirements
+                      of the Tempo Query container.
+                    properties:
+                      claims:
+                        description: |-
+                          Claims lists the names of resources, defined in spec.resourceClaims,
+                          that are used by this container.
+
+                          This is an alpha field and requires enabling the
+                          DynamicResourceAllocation feature gate.
+
+                          This field is immutable. It can only be set for containers.
+                        items:
+                          description: ResourceClaim references one entry in PodSpec.ResourceClaims.
+                          properties:
+                            name:
+                              description: |-
+                                Name must match the name of one entry in pod.spec.resourceClaims of
+                                the Pod where this field is used. It makes that resource available
+                                inside a container.
+                              type: string
+                            request:
+                              description: |-
+                                Request is the name chosen for a request in the referenced claim.
+                                If empty, everything from the claim is made available, otherwise
+                                only the result of this request.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        type: array
+                        x-kubernetes-list-map-keys:
+                        - name
+                        x-kubernetes-list-type: map
+                      limits:
+                        additionalProperties:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        description: |-
+                          Limits describes the maximum amount of compute resources allowed.
+                          More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+                        type: object
+                      requests:
+                        additionalProperties:
+                          anyOf:
+                          - type: integer
+                          - type: string
+                          pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                          x-kubernetes-int-or-string: true
+                        description: |-
+                          Requests describes the minimum amount of compute resources required.
+                          If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
+                          otherwise to an implementation-defined value. Requests cannot exceed Limits.
+                          More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+                        type: object
+                    type: object
                 required:
                 - enabled
                 type: object
@@ -1408,6 +1514,12 @@ spec:
                                 the Pod where this field is used. It makes that resource available
                                 inside a container.
                               type: string
+                            request:
+                              description: |-
+                                Request is the name chosen for a request in the referenced claim.
+                                If empty, everything from the claim is made available, otherwise
+                                only the result of this request.
+                              type: string
                           required:
                           - name
                           type: object
@@ -1495,11 +1607,13 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: atomic
                                   required:
                                   - key
                                   - operator
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                               matchLabels:
                                 additionalProperties:
                                   type: string
@@ -1540,6 +1654,239 @@ spec:
                         type: object
                     type: object
                 type: object
+              podSecurityContext:
+                description: PodSecurityContext defines the security context that
+                  will be applied to the Tempo Pod.
+                properties:
+                  appArmorProfile:
+                    description: |-
+                      appArmorProfile is the AppArmor options to use by the containers in this pod.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    properties:
+                      localhostProfile:
+                        description: |-
+                          localhostProfile indicates a profile loaded on the node that should be used.
+                          The profile must be preconfigured on the node to work.
+                          Must match the loaded name of the profile.
+                          Must be set if and only if type is "Localhost".
+                        type: string
+                      type:
+                        description: |-
+                          type indicates which kind of AppArmor profile will be applied.
+                          Valid options are:
+                            Localhost - a profile pre-loaded on the node.
+                            RuntimeDefault - the container runtime's default profile.
+                            Unconfined - no AppArmor enforcement.
+                        type: string
+                    required:
+                    - type
+                    type: object
+                  fsGroup:
+                    description: |-
+                      A special supplemental group that applies to all containers in a pod.
+                      Some volume types allow the Kubelet to change the ownership of that volume
+                      to be owned by the pod:
+
+                      1. The owning GID will be the FSGroup
+                      2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
+                      3. The permission bits are OR'd with rw-rw----
+
+                      If unset, the Kubelet will not modify the ownership and permissions of any volume.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    format: int64
+                    type: integer
+                  fsGroupChangePolicy:
+                    description: |-
+                      fsGroupChangePolicy defines behavior of changing ownership and permission of the volume
+                      before being exposed inside Pod. This field will only apply to
+                      volume types which support fsGroup based ownership(and permissions).
+                      It will have no effect on ephemeral volume types such as: secret, configmaps
+                      and emptydir.
+                      Valid values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    type: string
+                  runAsGroup:
+                    description: |-
+                      The GID to run the entrypoint of the container process.
+                      Uses runtime default if unset.
+                      May also be set in SecurityContext.  If set in both SecurityContext and
+                      PodSecurityContext, the value specified in SecurityContext takes precedence
+                      for that container.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    format: int64
+                    type: integer
+                  runAsNonRoot:
+                    description: |-
+                      Indicates that the container must run as a non-root user.
+                      If true, the Kubelet will validate the image at runtime to ensure that it
+                      does not run as UID 0 (root) and fail to start the container if it does.
+                      If unset or false, no such validation will be performed.
+                      May also be set in SecurityContext.  If set in both SecurityContext and
+                      PodSecurityContext, the value specified in SecurityContext takes precedence.
+                    type: boolean
+                  runAsUser:
+                    description: |-
+                      The UID to run the entrypoint of the container process.
+                      Defaults to user specified in image metadata if unspecified.
+                      May also be set in SecurityContext.  If set in both SecurityContext and
+                      PodSecurityContext, the value specified in SecurityContext takes precedence
+                      for that container.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    format: int64
+                    type: integer
+                  seLinuxChangePolicy:
+                    description: |-
+                      seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                      It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                      Valid values are "MountOption" and "Recursive".
+
+                      "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                      This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                      "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                      This requires all Pods that share the same volume to use the same SELinux label.
+                      It is not possible to share the same volume among privileged and unprivileged Pods.
+                      Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                      whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                      CSIDriver instance. Other volumes are always re-labelled recursively.
+                      "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                      If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                      If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                      and "Recursive" for all other volumes.
+
+                      This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                      All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    type: string
+                  seLinuxOptions:
+                    description: |-
+                      The SELinux context to be applied to all containers.
+                      If unspecified, the container runtime will allocate a random SELinux context for each
+                      container.  May also be set in SecurityContext.  If set in
+                      both SecurityContext and PodSecurityContext, the value specified in SecurityContext
+                      takes precedence for that container.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    properties:
+                      level:
+                        description: Level is SELinux level label that applies to
+                          the container.
+                        type: string
+                      role:
+                        description: Role is a SELinux role label that applies to
+                          the container.
+                        type: string
+                      type:
+                        description: Type is a SELinux type label that applies to
+                          the container.
+                        type: string
+                      user:
+                        description: User is a SELinux user label that applies to
+                          the container.
+                        type: string
+                    type: object
+                  seccompProfile:
+                    description: |-
+                      The seccomp options to use by the containers in this pod.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    properties:
+                      localhostProfile:
+                        description: |-
+                          localhostProfile indicates a profile defined in a file on the node should be used.
+                          The profile must be preconfigured on the node to work.
+                          Must be a descending path, relative to the kubelet's configured seccomp profile location.
+                          Must be set if type is "Localhost". Must NOT be set for any other type.
+                        type: string
+                      type:
+                        description: |-
+                          type indicates which kind of seccomp profile will be applied.
+                          Valid options are:
+
+                          Localhost - a profile defined in a file on the node should be used.
+                          RuntimeDefault - the container runtime default profile should be used.
+                          Unconfined - no profile should be applied.
+                        type: string
+                    required:
+                    - type
+                    type: object
+                  supplementalGroups:
+                    description: |-
+                      A list of groups applied to the first process run in each container, in
+                      addition to the container's primary GID and fsGroup (if specified).  If
+                      the SupplementalGroupsPolicy feature is enabled, the
+                      supplementalGroupsPolicy field determines whether these are in addition
+                      to or instead of any group memberships defined in the container image.
+                      If unspecified, no additional groups are added, though group memberships
+                      defined in the container image may still be used, depending on the
+                      supplementalGroupsPolicy field.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    items:
+                      format: int64
+                      type: integer
+                    type: array
+                    x-kubernetes-list-type: atomic
+                  supplementalGroupsPolicy:
+                    description: |-
+                      Defines how supplemental groups of the first container processes are calculated.
+                      Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                      (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                      and the container runtime must implement support for this feature.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    type: string
+                  sysctls:
+                    description: |-
+                      Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
+                      sysctls (by the container runtime) might fail to launch.
+                      Note that this field cannot be set when spec.os.name is windows.
+                    items:
+                      description: Sysctl defines a kernel parameter to be set
+                      properties:
+                        name:
+                          description: Name of a property to set
+                          type: string
+                        value:
+                          description: Value of a property to set
+                          type: string
+                      required:
+                      - name
+                      - value
+                      type: object
+                    type: array
+                    x-kubernetes-list-type: atomic
+                  windowsOptions:
+                    description: |-
+                      The Windows specific settings applied to all containers.
+                      If unspecified, the options within a container's SecurityContext will be used.
+                      If set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext takes precedence.
+                      Note that this field cannot be set when spec.os.name is linux.
+                    properties:
+                      gmsaCredentialSpec:
+                        description: |-
+                          GMSACredentialSpec is where the GMSA admission webhook
+                          (https://github.com/kubernetes-sigs/windows-gmsa) inlines the contents of the
+                          GMSA credential spec named by the GMSACredentialSpecName field.
+                        type: string
+                      gmsaCredentialSpecName:
+                        description: GMSACredentialSpecName is the name of the GMSA
+                          credential spec to use.
+                        type: string
+                      hostProcess:
+                        description: |-
+                          HostProcess determines if a container should be run as a 'Host Process' container.
+                          All of a Pod's containers must have the same effective HostProcess value
+                          (it is not allowed to have a mix of HostProcess containers and non-HostProcess containers).
+                          In addition, if HostProcess is true then HostNetwork must also be set to true.
+                        type: boolean
+                      runAsUserName:
+                        description: |-
+                          The UserName in Windows to run the entrypoint of the container process.
+                          Defaults to the user specified in image metadata if unspecified.
+                          May also be set in PodSecurityContext. If set in both SecurityContext and
+                          PodSecurityContext, the value specified in SecurityContext takes precedence.
+                        type: string
+                    type: object
+                type: object
               query:
                 description: Query defines query configuration.
                 properties:
@@ -1574,6 +1921,12 @@ spec:
                             Name must match the name of one entry in pod.spec.resourceClaims of
                             the Pod where this field is used. It makes that resource available
                             inside a container.
+                          type: string
+                        request:
+                          description: |-
+                            Request is the name chosen for a request in the referenced claim.
+                            If empty, everything from the claim is made available, otherwise
+                            only the result of this request.
                           type: string
                       required:
                       - name
@@ -1657,6 +2010,16 @@ spec:
                       s3:
                         description: S3 defines the configuration for Amazon S3.
                         properties:
+                          credentialMode:
+                            description: |-
+                              CredentialMode can be used to set the desired credential mode for authenticating with the object storage.
+                              If this is not set, then the operator tries to infer the credential mode from the provided secret and its
+                              own configuration.
+                            enum:
+                            - static
+                            - token
+                            - token-cco
+                            type: string
                           secret:
                             description: |-
                               Secret is the name of a Secret containing credentials for accessing object storage.
@@ -1700,6 +2063,11 @@ spec:
                           Default: 2Gi for memory, 10Gi for all other backends.
                         pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                         x-kubernetes-int-or-string: true
+                      storageClassName:
+                        description: StorageClassName for the PVC used by the Tempo
+                          Pod. Defaults to nil (uses the default storage class in
+                          the cluster).
+                        type: string
                     required:
                     - backend
                     type: object
@@ -2099,11 +2467,13 @@ spec:
                                   items:
                                     type: string
                                   type: array
+                                  x-kubernetes-list-type: atomic
                               required:
                               - key
                               - operator
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           matchLabels:
                             additionalProperties:
                               type: string
@@ -2183,6 +2553,12 @@ spec:
                                 Name must match the name of one entry in pod.spec.resourceClaims of
                                 the Pod where this field is used. It makes that resource available
                                 inside a container.
+                              type: string
+                            request:
+                              description: |-
+                                Request is the name chosen for a request in the referenced claim.
+                                If empty, everything from the claim is made available, otherwise
+                                only the result of this request.
                               type: string
                           required:
                           - name
@@ -2279,6 +2655,16 @@ spec:
                       Secret for object storage authentication.
                       Name of a secret in the same namespace as the TempoStack custom resource.
                     properties:
+                      credentialMode:
+                        description: |-
+                          CredentialMode can be used to set the desired credential mode for authenticating with the object storage.
+                          If this is not set, then the operator tries to infer the credential mode from the provided secret and its
+                          own configuration.
+                        enum:
+                        - static
+                        - token
+                        - token-cco
+                        type: string
                       name:
                         description: Name of a secret in the namespace configured
                           for object storage secrets.
@@ -2348,6 +2734,29 @@ spec:
                         description: PodSecurityContext defines security context will
                           be applied to all pods of this component.
                         properties:
+                          appArmorProfile:
+                            description: |-
+                              appArmorProfile is the AppArmor options to use by the containers in this pod.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            properties:
+                              localhostProfile:
+                                description: |-
+                                  localhostProfile indicates a profile loaded on the node that should be used.
+                                  The profile must be preconfigured on the node to work.
+                                  Must match the loaded name of the profile.
+                                  Must be set if and only if type is "Localhost".
+                                type: string
+                              type:
+                                description: |-
+                                  type indicates which kind of AppArmor profile will be applied.
+                                  Valid options are:
+                                    Localhost - a profile pre-loaded on the node.
+                                    RuntimeDefault - the container runtime's default profile.
+                                    Unconfined - no AppArmor enforcement.
+                                type: string
+                            required:
+                            - type
+                            type: object
                           fsGroup:
                             description: |-
                               A special supplemental group that applies to all containers in a pod.
@@ -2401,6 +2810,32 @@ spec:
                               Note that this field cannot be set when spec.os.name is windows.
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            description: |-
+                              seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                              It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                              Valid values are "MountOption" and "Recursive".
+
+                              "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                              This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                              "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                              This requires all Pods that share the same volume to use the same SELinux label.
+                              It is not possible to share the same volume among privileged and unprivileged Pods.
+                              Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                              whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                              CSIDriver instance. Other volumes are always re-labelled recursively.
+                              "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                              If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                              If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                              and "Recursive" for all other volumes.
+
+                              This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                              All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           seLinuxOptions:
                             description: |-
                               The SELinux context to be applied to all containers.
@@ -2453,17 +2888,28 @@ spec:
                             type: object
                           supplementalGroups:
                             description: |-
-                              A list of groups applied to the first process run in each container, in addition
-                              to the container's primary GID, the fsGroup (if specified), and group memberships
-                              defined in the container image for the uid of the container process. If unspecified,
-                              no additional groups are added to any container. Note that group memberships
-                              defined in the container image for the uid of the container process are still effective,
-                              even if they are not included in this list.
+                              A list of groups applied to the first process run in each container, in
+                              addition to the container's primary GID and fsGroup (if specified).  If
+                              the SupplementalGroupsPolicy feature is enabled, the
+                              supplementalGroupsPolicy field determines whether these are in addition
+                              to or instead of any group memberships defined in the container image.
+                              If unspecified, no additional groups are added, though group memberships
+                              defined in the container image may still be used, depending on the
+                              supplementalGroupsPolicy field.
                               Note that this field cannot be set when spec.os.name is windows.
                             items:
                               format: int64
                               type: integer
                             type: array
+                            x-kubernetes-list-type: atomic
+                          supplementalGroupsPolicy:
+                            description: |-
+                              Defines how supplemental groups of the first container processes are calculated.
+                              Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                              (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                              and the container runtime must implement support for this feature.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           sysctls:
                             description: |-
                               Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -2484,6 +2930,7 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           windowsOptions:
                             description: |-
                               The Windows specific settings applied to all containers.
@@ -2544,6 +2991,12 @@ spec:
                                     Name must match the name of one entry in pod.spec.resourceClaims of
                                     the Pod where this field is used. It makes that resource available
                                     inside a container.
+                                  type: string
+                                request:
+                                  description: |-
+                                    Request is the name chosen for a request in the referenced claim.
+                                    If empty, everything from the claim is made available, otherwise
+                                    only the result of this request.
                                   type: string
                               required:
                               - name
@@ -2638,6 +3091,29 @@ spec:
                             description: PodSecurityContext defines security context
                               will be applied to all pods of this component.
                             properties:
+                              appArmorProfile:
+                                description: |-
+                                  appArmorProfile is the AppArmor options to use by the containers in this pod.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                properties:
+                                  localhostProfile:
+                                    description: |-
+                                      localhostProfile indicates a profile loaded on the node that should be used.
+                                      The profile must be preconfigured on the node to work.
+                                      Must match the loaded name of the profile.
+                                      Must be set if and only if type is "Localhost".
+                                    type: string
+                                  type:
+                                    description: |-
+                                      type indicates which kind of AppArmor profile will be applied.
+                                      Valid options are:
+                                        Localhost - a profile pre-loaded on the node.
+                                        RuntimeDefault - the container runtime's default profile.
+                                        Unconfined - no AppArmor enforcement.
+                                    type: string
+                                required:
+                                - type
+                                type: object
                               fsGroup:
                                 description: |-
                                   A special supplemental group that applies to all containers in a pod.
@@ -2691,6 +3167,32 @@ spec:
                                   Note that this field cannot be set when spec.os.name is windows.
                                 format: int64
                                 type: integer
+                              seLinuxChangePolicy:
+                                description: |-
+                                  seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                                  It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                                  Valid values are "MountOption" and "Recursive".
+
+                                  "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                                  This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                                  "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                                  This requires all Pods that share the same volume to use the same SELinux label.
+                                  It is not possible to share the same volume among privileged and unprivileged Pods.
+                                  Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                                  whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                                  CSIDriver instance. Other volumes are always re-labelled recursively.
+                                  "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                                  If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                                  If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                                  and "Recursive" for all other volumes.
+
+                                  This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                                  All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               seLinuxOptions:
                                 description: |-
                                   The SELinux context to be applied to all containers.
@@ -2743,17 +3245,28 @@ spec:
                                 type: object
                               supplementalGroups:
                                 description: |-
-                                  A list of groups applied to the first process run in each container, in addition
-                                  to the container's primary GID, the fsGroup (if specified), and group memberships
-                                  defined in the container image for the uid of the container process. If unspecified,
-                                  no additional groups are added to any container. Note that group memberships
-                                  defined in the container image for the uid of the container process are still effective,
-                                  even if they are not included in this list.
+                                  A list of groups applied to the first process run in each container, in
+                                  addition to the container's primary GID and fsGroup (if specified).  If
+                                  the SupplementalGroupsPolicy feature is enabled, the
+                                  supplementalGroupsPolicy field determines whether these are in addition
+                                  to or instead of any group memberships defined in the container image.
+                                  If unspecified, no additional groups are added, though group memberships
+                                  defined in the container image may still be used, depending on the
+                                  supplementalGroupsPolicy field.
                                   Note that this field cannot be set when spec.os.name is windows.
                                 items:
                                   format: int64
                                   type: integer
                                 type: array
+                                x-kubernetes-list-type: atomic
+                              supplementalGroupsPolicy:
+                                description: |-
+                                  Defines how supplemental groups of the first container processes are calculated.
+                                  Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                                  (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                                  and the container runtime must implement support for this feature.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               sysctls:
                                 description: |-
                                   Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -2774,6 +3287,7 @@ spec:
                                   - value
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                               windowsOptions:
                                 description: |-
                                   The Windows specific settings applied to all containers.
@@ -2835,6 +3349,12 @@ spec:
                                         Name must match the name of one entry in pod.spec.resourceClaims of
                                         the Pod where this field is used. It makes that resource available
                                         inside a container.
+                                      type: string
+                                    request:
+                                      description: |-
+                                        Request is the name chosen for a request in the referenced claim.
+                                        If empty, everything from the claim is made available, otherwise
+                                        only the result of this request.
                                       type: string
                                   required:
                                   - name
@@ -2956,6 +3476,29 @@ spec:
                             description: PodSecurityContext defines security context
                               will be applied to all pods of this component.
                             properties:
+                              appArmorProfile:
+                                description: |-
+                                  appArmorProfile is the AppArmor options to use by the containers in this pod.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                properties:
+                                  localhostProfile:
+                                    description: |-
+                                      localhostProfile indicates a profile loaded on the node that should be used.
+                                      The profile must be preconfigured on the node to work.
+                                      Must match the loaded name of the profile.
+                                      Must be set if and only if type is "Localhost".
+                                    type: string
+                                  type:
+                                    description: |-
+                                      type indicates which kind of AppArmor profile will be applied.
+                                      Valid options are:
+                                        Localhost - a profile pre-loaded on the node.
+                                        RuntimeDefault - the container runtime's default profile.
+                                        Unconfined - no AppArmor enforcement.
+                                    type: string
+                                required:
+                                - type
+                                type: object
                               fsGroup:
                                 description: |-
                                   A special supplemental group that applies to all containers in a pod.
@@ -3009,6 +3552,32 @@ spec:
                                   Note that this field cannot be set when spec.os.name is windows.
                                 format: int64
                                 type: integer
+                              seLinuxChangePolicy:
+                                description: |-
+                                  seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                                  It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                                  Valid values are "MountOption" and "Recursive".
+
+                                  "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                                  This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                                  "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                                  This requires all Pods that share the same volume to use the same SELinux label.
+                                  It is not possible to share the same volume among privileged and unprivileged Pods.
+                                  Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                                  whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                                  CSIDriver instance. Other volumes are always re-labelled recursively.
+                                  "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                                  If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                                  If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                                  and "Recursive" for all other volumes.
+
+                                  This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                                  All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               seLinuxOptions:
                                 description: |-
                                   The SELinux context to be applied to all containers.
@@ -3061,17 +3630,28 @@ spec:
                                 type: object
                               supplementalGroups:
                                 description: |-
-                                  A list of groups applied to the first process run in each container, in addition
-                                  to the container's primary GID, the fsGroup (if specified), and group memberships
-                                  defined in the container image for the uid of the container process. If unspecified,
-                                  no additional groups are added to any container. Note that group memberships
-                                  defined in the container image for the uid of the container process are still effective,
-                                  even if they are not included in this list.
+                                  A list of groups applied to the first process run in each container, in
+                                  addition to the container's primary GID and fsGroup (if specified).  If
+                                  the SupplementalGroupsPolicy feature is enabled, the
+                                  supplementalGroupsPolicy field determines whether these are in addition
+                                  to or instead of any group memberships defined in the container image.
+                                  If unspecified, no additional groups are added, though group memberships
+                                  defined in the container image may still be used, depending on the
+                                  supplementalGroupsPolicy field.
                                   Note that this field cannot be set when spec.os.name is windows.
                                 items:
                                   format: int64
                                   type: integer
                                 type: array
+                                x-kubernetes-list-type: atomic
+                              supplementalGroupsPolicy:
+                                description: |-
+                                  Defines how supplemental groups of the first container processes are calculated.
+                                  Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                                  (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                                  and the container runtime must implement support for this feature.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               sysctls:
                                 description: |-
                                   Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -3092,6 +3672,7 @@ spec:
                                   - value
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                               windowsOptions:
                                 description: |-
                                   The Windows specific settings applied to all containers.
@@ -3153,6 +3734,12 @@ spec:
                                         Name must match the name of one entry in pod.spec.resourceClaims of
                                         the Pod where this field is used. It makes that resource available
                                         inside a container.
+                                      type: string
+                                    request:
+                                      description: |-
+                                        Request is the name chosen for a request in the referenced claim.
+                                        If empty, everything from the claim is made available, otherwise
+                                        only the result of this request.
                                       type: string
                                   required:
                                   - name
@@ -3297,6 +3884,29 @@ spec:
                         description: PodSecurityContext defines security context will
                           be applied to all pods of this component.
                         properties:
+                          appArmorProfile:
+                            description: |-
+                              appArmorProfile is the AppArmor options to use by the containers in this pod.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            properties:
+                              localhostProfile:
+                                description: |-
+                                  localhostProfile indicates a profile loaded on the node that should be used.
+                                  The profile must be preconfigured on the node to work.
+                                  Must match the loaded name of the profile.
+                                  Must be set if and only if type is "Localhost".
+                                type: string
+                              type:
+                                description: |-
+                                  type indicates which kind of AppArmor profile will be applied.
+                                  Valid options are:
+                                    Localhost - a profile pre-loaded on the node.
+                                    RuntimeDefault - the container runtime's default profile.
+                                    Unconfined - no AppArmor enforcement.
+                                type: string
+                            required:
+                            - type
+                            type: object
                           fsGroup:
                             description: |-
                               A special supplemental group that applies to all containers in a pod.
@@ -3350,6 +3960,32 @@ spec:
                               Note that this field cannot be set when spec.os.name is windows.
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            description: |-
+                              seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                              It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                              Valid values are "MountOption" and "Recursive".
+
+                              "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                              This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                              "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                              This requires all Pods that share the same volume to use the same SELinux label.
+                              It is not possible to share the same volume among privileged and unprivileged Pods.
+                              Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                              whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                              CSIDriver instance. Other volumes are always re-labelled recursively.
+                              "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                              If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                              If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                              and "Recursive" for all other volumes.
+
+                              This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                              All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           seLinuxOptions:
                             description: |-
                               The SELinux context to be applied to all containers.
@@ -3402,17 +4038,28 @@ spec:
                             type: object
                           supplementalGroups:
                             description: |-
-                              A list of groups applied to the first process run in each container, in addition
-                              to the container's primary GID, the fsGroup (if specified), and group memberships
-                              defined in the container image for the uid of the container process. If unspecified,
-                              no additional groups are added to any container. Note that group memberships
-                              defined in the container image for the uid of the container process are still effective,
-                              even if they are not included in this list.
+                              A list of groups applied to the first process run in each container, in
+                              addition to the container's primary GID and fsGroup (if specified).  If
+                              the SupplementalGroupsPolicy feature is enabled, the
+                              supplementalGroupsPolicy field determines whether these are in addition
+                              to or instead of any group memberships defined in the container image.
+                              If unspecified, no additional groups are added, though group memberships
+                              defined in the container image may still be used, depending on the
+                              supplementalGroupsPolicy field.
                               Note that this field cannot be set when spec.os.name is windows.
                             items:
                               format: int64
                               type: integer
                             type: array
+                            x-kubernetes-list-type: atomic
+                          supplementalGroupsPolicy:
+                            description: |-
+                              Defines how supplemental groups of the first container processes are calculated.
+                              Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                              (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                              and the container runtime must implement support for this feature.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           sysctls:
                             description: |-
                               Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -3433,6 +4080,7 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           windowsOptions:
                             description: |-
                               The Windows specific settings applied to all containers.
@@ -3493,6 +4141,12 @@ spec:
                                     Name must match the name of one entry in pod.spec.resourceClaims of
                                     the Pod where this field is used. It makes that resource available
                                     inside a container.
+                                  type: string
+                                request:
+                                  description: |-
+                                    Request is the name chosen for a request in the referenced claim.
+                                    If empty, everything from the claim is made available, otherwise
+                                    only the result of this request.
                                   type: string
                               required:
                               - name
@@ -3580,6 +4234,29 @@ spec:
                         description: PodSecurityContext defines security context will
                           be applied to all pods of this component.
                         properties:
+                          appArmorProfile:
+                            description: |-
+                              appArmorProfile is the AppArmor options to use by the containers in this pod.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            properties:
+                              localhostProfile:
+                                description: |-
+                                  localhostProfile indicates a profile loaded on the node that should be used.
+                                  The profile must be preconfigured on the node to work.
+                                  Must match the loaded name of the profile.
+                                  Must be set if and only if type is "Localhost".
+                                type: string
+                              type:
+                                description: |-
+                                  type indicates which kind of AppArmor profile will be applied.
+                                  Valid options are:
+                                    Localhost - a profile pre-loaded on the node.
+                                    RuntimeDefault - the container runtime's default profile.
+                                    Unconfined - no AppArmor enforcement.
+                                type: string
+                            required:
+                            - type
+                            type: object
                           fsGroup:
                             description: |-
                               A special supplemental group that applies to all containers in a pod.
@@ -3633,6 +4310,32 @@ spec:
                               Note that this field cannot be set when spec.os.name is windows.
                             format: int64
                             type: integer
+                          seLinuxChangePolicy:
+                            description: |-
+                              seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                              It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                              Valid values are "MountOption" and "Recursive".
+
+                              "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                              This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                              "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                              This requires all Pods that share the same volume to use the same SELinux label.
+                              It is not possible to share the same volume among privileged and unprivileged Pods.
+                              Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                              whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                              CSIDriver instance. Other volumes are always re-labelled recursively.
+                              "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                              If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                              If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                              and "Recursive" for all other volumes.
+
+                              This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                              All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           seLinuxOptions:
                             description: |-
                               The SELinux context to be applied to all containers.
@@ -3685,17 +4388,28 @@ spec:
                             type: object
                           supplementalGroups:
                             description: |-
-                              A list of groups applied to the first process run in each container, in addition
-                              to the container's primary GID, the fsGroup (if specified), and group memberships
-                              defined in the container image for the uid of the container process. If unspecified,
-                              no additional groups are added to any container. Note that group memberships
-                              defined in the container image for the uid of the container process are still effective,
-                              even if they are not included in this list.
+                              A list of groups applied to the first process run in each container, in
+                              addition to the container's primary GID and fsGroup (if specified).  If
+                              the SupplementalGroupsPolicy feature is enabled, the
+                              supplementalGroupsPolicy field determines whether these are in addition
+                              to or instead of any group memberships defined in the container image.
+                              If unspecified, no additional groups are added, though group memberships
+                              defined in the container image may still be used, depending on the
+                              supplementalGroupsPolicy field.
                               Note that this field cannot be set when spec.os.name is windows.
                             items:
                               format: int64
                               type: integer
                             type: array
+                            x-kubernetes-list-type: atomic
+                          supplementalGroupsPolicy:
+                            description: |-
+                              Defines how supplemental groups of the first container processes are calculated.
+                              Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                              (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                              and the container runtime must implement support for this feature.
+                              Note that this field cannot be set when spec.os.name is windows.
+                            type: string
                           sysctls:
                             description: |-
                               Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -3716,6 +4430,7 @@ spec:
                               - value
                               type: object
                             type: array
+                            x-kubernetes-list-type: atomic
                           windowsOptions:
                             description: |-
                               The Windows specific settings applied to all containers.
@@ -3776,6 +4491,12 @@ spec:
                                     Name must match the name of one entry in pod.spec.resourceClaims of
                                     the Pod where this field is used. It makes that resource available
                                     inside a container.
+                                  type: string
+                                request:
+                                  description: |-
+                                    Request is the name chosen for a request in the referenced claim.
+                                    If empty, everything from the claim is made available, otherwise
+                                    only the result of this request.
                                   type: string
                               required:
                               - name
@@ -3871,6 +4592,29 @@ spec:
                             description: PodSecurityContext defines security context
                               will be applied to all pods of this component.
                             properties:
+                              appArmorProfile:
+                                description: |-
+                                  appArmorProfile is the AppArmor options to use by the containers in this pod.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                properties:
+                                  localhostProfile:
+                                    description: |-
+                                      localhostProfile indicates a profile loaded on the node that should be used.
+                                      The profile must be preconfigured on the node to work.
+                                      Must match the loaded name of the profile.
+                                      Must be set if and only if type is "Localhost".
+                                    type: string
+                                  type:
+                                    description: |-
+                                      type indicates which kind of AppArmor profile will be applied.
+                                      Valid options are:
+                                        Localhost - a profile pre-loaded on the node.
+                                        RuntimeDefault - the container runtime's default profile.
+                                        Unconfined - no AppArmor enforcement.
+                                    type: string
+                                required:
+                                - type
+                                type: object
                               fsGroup:
                                 description: |-
                                   A special supplemental group that applies to all containers in a pod.
@@ -3924,6 +4668,32 @@ spec:
                                   Note that this field cannot be set when spec.os.name is windows.
                                 format: int64
                                 type: integer
+                              seLinuxChangePolicy:
+                                description: |-
+                                  seLinuxChangePolicy defines how the container's SELinux label is applied to all volumes used by the Pod.
+                                  It has no effect on nodes that do not support SELinux or to volumes does not support SELinux.
+                                  Valid values are "MountOption" and "Recursive".
+
+                                  "Recursive" means relabeling of all files on all Pod volumes by the container runtime.
+                                  This may be slow for large volumes, but allows mixing privileged and unprivileged Pods sharing the same volume on the same node.
+
+                                  "MountOption" mounts all eligible Pod volumes with `-o context` mount option.
+                                  This requires all Pods that share the same volume to use the same SELinux label.
+                                  It is not possible to share the same volume among privileged and unprivileged Pods.
+                                  Eligible volumes are in-tree FibreChannel and iSCSI volumes, and all CSI volumes
+                                  whose CSI driver announces SELinux support by setting spec.seLinuxMount: true in their
+                                  CSIDriver instance. Other volumes are always re-labelled recursively.
+                                  "MountOption" value is allowed only when SELinuxMount feature gate is enabled.
+
+                                  If not specified and SELinuxMount feature gate is enabled, "MountOption" is used.
+                                  If not specified and SELinuxMount feature gate is disabled, "MountOption" is used for ReadWriteOncePod volumes
+                                  and "Recursive" for all other volumes.
+
+                                  This field affects only Pods that have SELinux label set, either in PodSecurityContext or in SecurityContext of all containers.
+
+                                  All Pods that use the same volume should use the same seLinuxChangePolicy, otherwise some pods can get stuck in ContainerCreating state.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               seLinuxOptions:
                                 description: |-
                                   The SELinux context to be applied to all containers.
@@ -3976,17 +4746,28 @@ spec:
                                 type: object
                               supplementalGroups:
                                 description: |-
-                                  A list of groups applied to the first process run in each container, in addition
-                                  to the container's primary GID, the fsGroup (if specified), and group memberships
-                                  defined in the container image for the uid of the container process. If unspecified,
-                                  no additional groups are added to any container. Note that group memberships
-                                  defined in the container image for the uid of the container process are still effective,
-                                  even if they are not included in this list.
+                                  A list of groups applied to the first process run in each container, in
+                                  addition to the container's primary GID and fsGroup (if specified).  If
+                                  the SupplementalGroupsPolicy feature is enabled, the
+                                  supplementalGroupsPolicy field determines whether these are in addition
+                                  to or instead of any group memberships defined in the container image.
+                                  If unspecified, no additional groups are added, though group memberships
+                                  defined in the container image may still be used, depending on the
+                                  supplementalGroupsPolicy field.
                                   Note that this field cannot be set when spec.os.name is windows.
                                 items:
                                   format: int64
                                   type: integer
                                 type: array
+                                x-kubernetes-list-type: atomic
+                              supplementalGroupsPolicy:
+                                description: |-
+                                  Defines how supplemental groups of the first container processes are calculated.
+                                  Valid values are "Merge" and "Strict". If not specified, "Merge" is used.
+                                  (Alpha) Using the field requires the SupplementalGroupsPolicy feature gate to be enabled
+                                  and the container runtime must implement support for this feature.
+                                  Note that this field cannot be set when spec.os.name is windows.
+                                type: string
                               sysctls:
                                 description: |-
                                   Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported
@@ -4007,6 +4788,7 @@ spec:
                                   - value
                                   type: object
                                 type: array
+                                x-kubernetes-list-type: atomic
                               windowsOptions:
                                 description: |-
                                   The Windows specific settings applied to all containers.
@@ -4068,6 +4850,12 @@ spec:
                                         Name must match the name of one entry in pod.spec.resourceClaims of
                                         the Pod where this field is used. It makes that resource available
                                         inside a container.
+                                      type: string
+                                    request:
+                                      description: |-
+                                        Request is the name chosen for a request in the referenced claim.
+                                        If empty, everything from the claim is made available, otherwise
+                                        only the result of this request.
                                       type: string
                                   required:
                                   - name
@@ -4178,6 +4966,12 @@ spec:
                                             Name must match the name of one entry in pod.spec.resourceClaims of
                                             the Pod where this field is used. It makes that resource available
                                             inside a container.
+                                          type: string
+                                        request:
+                                          description: |-
+                                            Request is the name chosen for a request in the referenced claim.
+                                            If empty, everything from the claim is made available, otherwise
+                                            only the result of this request.
                                           type: string
                                       required:
                                       - name
@@ -4319,6 +5113,12 @@ spec:
                                         the Pod where this field is used. It makes that resource available
                                         inside a container.
                                       type: string
+                                    request:
+                                      description: |-
+                                        Request is the name chosen for a request in the referenced claim.
+                                        If empty, everything from the claim is made available, otherwise
+                                        only the result of this request.
+                                      type: string
                                   required:
                                   - name
                                   type: object
@@ -4382,6 +5182,12 @@ spec:
                                             Name must match the name of one entry in pod.spec.resourceClaims of
                                             the Pod where this field is used. It makes that resource available
                                             inside a container.
+                                          type: string
+                                        request:
+                                          description: |-
+                                            Request is the name chosen for a request in the referenced claim.
+                                            If empty, everything from the claim is made available, otherwise
+                                            only the result of this request.
                                           type: string
                                       required:
                                       - name
@@ -4826,6 +5632,17 @@ rules:
   - list
   - watch
 - apiGroups:
+  - cloudcredential.openshift.io
+  resources:
+  - credentialsrequests
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
   - config.openshift.io
   resources:
   - dnses
@@ -4845,6 +5662,13 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - pods
+  verbs:
+  - create
+  - get
 - apiGroups:
   - monitoring.coreos.com
   resources:
@@ -4883,6 +5707,8 @@ rules:
   resources:
   - clusterrolebindings
   - clusterroles
+  - rolebindings
+  - roles
   verbs:
   - create
   - delete
@@ -5158,18 +5984,18 @@ spec:
         - --config=controller_manager_config.yaml
         env:
         - name: RELATED_IMAGE_TEMPO
-          value: docker.io/grafana/tempo:2.7.1
+          value: docker.io/grafana/tempo:2.8.1
         - name: RELATED_IMAGE_JAEGER_QUERY
-          value: docker.io/jaegertracing/jaeger-query:1.66.0
+          value: docker.io/jaegertracing/jaeger-query:1.68.0
         - name: RELATED_IMAGE_TEMPO_QUERY
-          value: docker.io/grafana/tempo-query:2.7.1
+          value: docker.io/grafana/tempo-query:2.8.1
         - name: RELATED_IMAGE_TEMPO_GATEWAY
-          value: quay.io/observatorium/api:main-2025-02-12-0636771
+          value: quay.io/observatorium/api:main-2025-06-16-5265085
         - name: RELATED_IMAGE_TEMPO_GATEWAY_OPA
-          value: quay.io/observatorium/opa-openshift:main-2025-01-22-ed30f3c
+          value: quay.io/observatorium/opa-openshift:main-2025-06-16-ecdeca0
         - name: RELATED_IMAGE_OAUTH_PROXY
           value: quay.io/openshift/origin-oauth-proxy:4.14
-        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.15.3
+        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.17.1
         livenessProbe:
           httpGet:
             path: /healthz
