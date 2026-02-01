@@ -4,7 +4,7 @@ directories:
   - githubRelease:
       disableAutoChecksumValidation: true
       slug: grafana/tempo-operator
-      tag: v0.17.1
+      tag: v0.19.0
     includePaths:
     - tempo-operator.yaml
     path: .

@@ -5686,6 +5686,7 @@ rules:
   - networking.k8s.io
   resources:
   - ingresses
+  - networkpolicies
   verbs:
   - create
   - delete
@@ -5898,6 +5899,7 @@ data:
         metrics:
           createServiceMonitors: false
           createPrometheusRules: false
+      networkPolicies: true
 kind: ConfigMap
 metadata:
   labels:
@@ -5984,18 +5986,18 @@ spec:
         - --config=controller_manager_config.yaml
         env:
         - name: RELATED_IMAGE_TEMPO
-          value: docker.io/grafana/tempo:2.8.1
+          value: docker.io/grafana/tempo:2.9.0
         - name: RELATED_IMAGE_JAEGER_QUERY
           value: docker.io/jaegertracing/jaeger-query:1.68.0
         - name: RELATED_IMAGE_TEMPO_QUERY
-          value: docker.io/grafana/tempo-query:2.8.1
+          value: docker.io/grafana/tempo-query:2.9.0
         - name: RELATED_IMAGE_TEMPO_GATEWAY
-          value: quay.io/observatorium/api:main-2025-06-16-5265085
+          value: quay.io/observatorium/api:main-2025-08-25-7489eb0
         - name: RELATED_IMAGE_TEMPO_GATEWAY_OPA
           value: quay.io/observatorium/opa-openshift:main-2025-06-16-ecdeca0
         - name: RELATED_IMAGE_OAUTH_PROXY
           value: quay.io/openshift/origin-oauth-proxy:4.14
-        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.17.1
+        image: ghcr.io/grafana/tempo-operator/tempo-operator:v0.19.0
         livenessProbe:
           httpGet:
             path: /healthz
