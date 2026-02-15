@@ -118,28 +118,28 @@ Settings for Tempo.
 | `tempo.storage.backend.type` | `memory` | Type of object storage that should be used. Valid options: `azure`, `gcs`, `s3`, `memory` (only for TempoMonolithic). |
 | `tempo.storage.backend.secret.name` | `""` | Name of the Secret containing the credentials to access the configured object storage. |
 | `tempo.storage.backend.secret.namespace` | `kadras-system` | Namespace containing the Secret with the credentials to access the configured object storage. |
-| `tempo.storage.backend.size` | `10Gi` | The size of the storage used by Tempo. |
+| `tempo.storage.size` | `10Gi` | The size of the storage used by Tempo. |
 | `tempo.resources.limits.cpu` | `750m` | Total resource cpu limits for Tempo. |
 | `tempo.resources.limits.memory` | `2Gi` | Total resource memory limits for Tempo. |
 | `tempo.resources.requests.cpu` | `500m` | Total resource cpu requests for Tempo. |
-| `tempo.resources.requests.cpu` | `1Gi` | Total resource memory requests for Tempo. |
+| `tempo.resources.requests.memory` | `1Gi` | Total resource memory requests for Tempo. |
 
 Settings for TempoStack.
 
 | Config | Default | Description |
 |-------|-------------------|-------------|
 | `tempo.tempoStack.enabled` | `false` | Whether to deploy the built-in TempoStack instance. |
-| `tempo.tempoStack.compactor.replicas` | `0` | Number of replicas to deploy for the Compactor component. In order to enable high availability, it should be greater than 1. |
-| `tempo.tempoStack.distributor.replicas` | `0` | Number of replicas to deploy for the Distributor component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.compactor.replicas` | `1` | Number of replicas to deploy for the Compactor component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.distributor.replicas` | `1` | Number of replicas to deploy for the Distributor component. In order to enable high availability, it should be greater than 1. |
 | `tempo.tempoStack.gateway.enabled` | `false` | Whether to enable the Tempo Gateway. |
 | `tempo.tempoStack.gateway.ingress.annotations` | `{}` | The annotations for the Ingress object. |
 | `tempo.tempoStack.gateway.ingress.host` | `""` | The hostname of the Ingress object. |
 | `tempo.tempoStack.gateway.ingress.ingressClassName` | `contour` | The class of the Ingress Controller to use for the Tempo Gateway. |
 | `tempo.tempoStack.gateway.ingress.type` | `""` | Type of Ingress for the Tempo Gateway. Valid options: `ingress`, `route`. |
-| `tempo.tempoStack.ingester.replicas` | `0` | Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.ingester.replicas` | `1` | Number of replicas to deploy for the Ingester component. In order to enable high availability, it should be greater than 1. |
 | `tempo.tempoStack.ingester.podSecurityContext` | `{}` | PodSecurityContext for the Ingester component. |
-| `tempo.tempoStack.querier.replicas` | `0` | Number of replicas to deploy for the Querier component. In order to enable high availability, it should be greater than 1. |
-| `tempo.tempoStack.queryFrontend.replicas` | `0` | Number of replicas to deploy for the Query Frontend component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.querier.replicas` | `1` | Number of replicas to deploy for the Querier component. In order to enable high availability, it should be greater than 1. |
+| `tempo.tempoStack.queryFrontend.replicas` | `1` | Number of replicas to deploy for the Query Frontend component. In order to enable high availability, it should be greater than 1. |
 
 Settings for TempoMonolithic.
 
